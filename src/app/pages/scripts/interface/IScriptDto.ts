@@ -8,6 +8,6 @@ export interface IScriptDto {
   image: string;
   price: number;
   isActive: boolean;
-  purchases: any;
+  purchases: any[];
   id: number;
 }

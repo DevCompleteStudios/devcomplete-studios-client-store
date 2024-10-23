@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IResponseDto } from '../interfaces/IResponseDto';
+import { IResponseDto } from './interfaces/IResponseDto';
 import { IScriptDto } from '../pages/scripts/interface/IScriptDto';
 
 @Injectable({
