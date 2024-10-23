@@ -1,0 +1,64 @@
+<section class="relative py-24 overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-zinc-900 to-black"></div>
+  <div class="relative container mx-auto text-center">
+    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+      Premium Scripts Collection
+    </h2>
+    <p class="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto">
+      Transform your projects with professionally crafted scripts
+    </p>
+  </div>
+</section>
+
+<main class="container mx-auto px-4 pb-24">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    @for (script of scripts; track script.id) {
+      <div class="bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden group hover:border-zinc-700 transition-all duration-300">
+        <div class="relative aspect-[16/9] overflow-hidden">
+          <img
+            [src]="script.image"
+            [alt]="script.name"
+            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+          >
+          @if (!script.isActive) {
+            <span class="absolute top-4 right-4 bg-red-500 text-white text-xs px-2 py-1 rounded">
+              Sold Out
+            </span>
+          }
+        </div>
+
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold text-white">{{script.name}}</h3>
+            <div class="flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-400 fill-yellow-400" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              <span class="text-zinc-400 text-sm">
+                {{script.purchases?.length || 0}} sales
+              </span>
+            </div>
+          </div>
+
+          <p class="text-zinc-400 text-sm mb-4">{{script.description}}</p>
+
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-2xl font-bold text-white">
+              ${{script.price.toFixed(2)}}
+            </span>
+          </div>
+
+          <button
+            [disabled]="!script.isActive"
+            class="w-full bg-white text-black hover:bg-zinc-200 disabled:opacity-50 disabled:cursor-not-allowed py-2 px-4 rounded-md flex items-center justify-center gap-2 transition-colors duration-200"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            {{script.isActive ? 'Get it now' : 'Out of stock'}}
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+</main>
