@@ -5,28 +5,48 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
+      @if (!showModalCode()) {
 
-    <h2 class="text-2xl font-semibold text-gray-800 text-center mb-4">Login</h2>
+        <h2 class="text-2xl font-semibold text-gray-800 text-center mb-4">Login</h2>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="mb-4">
-        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-        <input id="email" formControlName="email" type="email" placeholder="correo@example.com"
-          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+        <form [formGroup]="loginForm" (submit)="onSubmit()">
+          <div class="mb-4">
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input id="email" formControlName="email" type="email" placeholder="correo@example.com"
+              class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
 
-        @if (loginForm.invalid) {
-          <div class="px-2 py-1 bg-red-600 text-white rounded-md mt-2">
-            <p>Enter a valid email</p>
+            @if (loginForm.invalid) {
+              <div class="px-2 py-1 bg-red-600 text-white rounded-md mt-2">
+                <p>Enter a valid email</p>
+              </div>
+            }
+
           </div>
-        }
 
-      </div>
+          <div class="flex justify-center">
+            <button
+              [disabled]="!loginForm.valid || loading()"
+              type="submit"
+              class="px-6 py-2 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 transition disabled:opacity-40"
+            >
+              Sign in
+            </button>
+          </div>
+        </form>
+      }@else {
+        <div class="bg-white rounded-lg shadow-lg max-w-sm w-full p-6 relative">
+          <h3 class="text-center font-bold text-xl mb-4">Code Verification</h3>
+          <p class="text-center text-gray-600 mb-6">Enter the verification code of 6 digits sent to your email</p>
 
-      <div class="flex justify-center">
-        <button type="submit" class="px-6 py-2 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 transition-colors">
-          Sign in
-        </button>
-      </div>
-    </form>
-  </div>
+          <form class="w-full" [formGroup]="codeForm">
+            <input
+              (input)="onVerifyCode()"
+              [formControl]="codeForm.controls.code"
+              class="bg-gray-100 border border-gray-300 rounded-md w-full px-4 py-2 text-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300 ease-in-out"
+              type="text" maxlength="6" pattern="[0-9]*" inputmode="numeric" placeholder="123456" required>
+          </form>
+        </div>
+      }
+    </div>
 </div>

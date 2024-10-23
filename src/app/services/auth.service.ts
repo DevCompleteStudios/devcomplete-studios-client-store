@@ -14,7 +14,7 @@ export class AuthService {
   private email?: string = undefined;
   private token?: string = undefined;
 
-  private url: string = 'localhost:3000/api/auth';
+  private url: string = 'http://localhost:3000/api/auth';
 
   constructor(
     private http: HttpClient,
@@ -37,6 +37,7 @@ export class AuthService {
   logout(){}
 
   getUser(){}
+
 
   get getToken():string | undefined {
     if( !this.isLogged ) return undefined;
